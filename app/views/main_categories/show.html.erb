@@ -1,22 +1,4 @@
-<%if $admin%>
-<% @MCategoryItem = MainCategory.find(params[:id]).items %>
-<% @MCategoryItem.each do |this|%>
-<h3><%= link_to this.title, edit_main_category_path(params[:id])%></h3>
-<p><%= this.body%></p>
-  <% this.item_pics.each do |pic|%>
-      <%= link_to edit_main_category_main_category_pic_path(params[:id], pic.id) do %>
-        <img src="<%= pic.pic_url.url%>" style='height:100px; width:100px; margin-right:30px;'>
-    <%end%>
-  <%end%>
-<%end%>
 
-<br><br><button><%= link_to "Edit Category", edit_main_category_path(params[:id]) %></button>
-<%end%>
-<!-- ======================================================================================================= -->
-
-
-
-<%if !$admin%>
 <%@items = MainCategory.find(params[:id]).items%>
 <%if @items.any?%>
 <%@items.each do |item|%>
@@ -58,9 +40,7 @@
         
       </div> 
 
-                <% if $admin%>
-                    <br><button><%= link_to "Edit This Category", edit_main_category_path(category.id) %></button>
-                <%end%>
+              
 
        
 
@@ -81,7 +61,7 @@
 </div>
 
 <%end%>
-<%end%>
+
 
 
 

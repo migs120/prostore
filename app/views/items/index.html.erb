@@ -1,21 +1,27 @@
 
 
 <% @items = MainCategory.find(params[:main_category_id]).items%>
+
 <h3><%= link_to "Back to Categorys", root_path%><h3>
   <h3 class="text-center">Products for Sale</h3>
+  
+  
+<div class="col-1"></div>
 
-<div class="row">
-  <div class="col-xs-6 col-xs-offset-3">
+
+<div class="col-10">
+  <div class="col-12">
     <% @items.each do |item| %>
       <%= render "item_row", item: item, order_item: @order_item %>
     <% end %>
   </div>
+  <section style="clear:both;"><br><br><button><%= link_to "Add Item", new_main_category_item_path(params[:main_category_id]) %></button><br><br><br><br></section>
 </div>  
   
-  
+ <div class="col-1"></div> 
   
 <%if $admin%>
-<br><br><button><%= link_to "Add Item", new_main_category_item_path(params[:main_category_id]) %></button><br><br><br><br>
+
 <%end%>  
   
 
