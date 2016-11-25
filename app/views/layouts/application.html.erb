@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html >
+<head>
+  <title>E-Store.com</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/css/main_categories/index.css">
+  
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+  
+
+ 
+</head>
+
+
+<body ng-app="myapp" ng-controller="LandingCtrl">
+    
+   
+<!-- top menu bar -->
+ 
+<div class="col-m-12 col-12 seebox " style=" background-color:#5F5F5F; position:fixed; z-index: 5;" >
+
+  <%= link_to cart_path do%>
+    <div class="col-9 col-m-9 col-p-9  seebox buttonbox" id="button" style="background-color:#5F5F5F;">
+      <p class='cart-text' style="color:white;"> <%= render 'layouts/cart_text'%></p>
+    </div>
+  <%end%>
+  
+   <%= link_to root_path do%>
+  <div class="col-1 col-m-3 col-p-3  seebox buttonbox " id="button" style="float:left; background-color:#5F5F5F;" ><p style="color:white;">home</p></div>
+   <%end%>
+
+ </div>
+  
+  <%if current_user%>
+  <%= link_to "Sign out",destroy_user_session_path, method: :delete %>
+  <%end%>
+  
+  
+
+  
+       <% if $admin %>
+  
+   <!-- clear zone1 -->
+<div class="col-m-12 col-12 seebox" style="height:50px;  ">
+</div>   
+  
+  
+                 <ul class="nav nav-tabs">
+
+                       <li><%= link_to "E-Store", root_path %></li>
+
+                       <li><%= link_to "About", about_path %></li>
+
+                       <li><%= link_to "Purchases", purchases_path %></li>
+
+                       <li><%= link_to "Seeds", seeds_path %></li>
+
+                      <div class="pull-right user-info">
+                           <% if current_user %>
+                              Hello <%= link_to (current_user.name || current_user.email), edit_user_registration_path %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+                           <% else %>
+                             <%= link_to "Sign In", new_user_session_path %> or 
+                             <%= link_to "Sign Up", new_user_registration_path %>
+                           <% end %>
+                       </div>
+                </ul>
+     
+       
+     
+       <% if flash[:notice] %>
+         <div class="alert alert-success">
+           <button type="button" class="close" data-dismiss="alert">&times;</button>
+           <%= flash[:notice] %>
+         </div>
+       <% elsif flash[:error] %>
+         <div class="alert alert-danger">
+           <button type="button" class="close" data-dismiss="alert">&times;</button>
+           <%= flash[:error] %>
+         </div>
+       <% elsif flash[:alert] %>
+         <div class="alert alert-warning">
+           <button type="button" class="close" data-dismiss="alert">&times;</button>
+           <%= flash[:alert] %>
+         </div>
+       <% end %>
+     
+     
+
+    <%end%>  
+  
+    <!-- clear zone2 -->
+<div class="col-m-12 col-12 seebox removempb" style="height:70px;" style="">
+</div> 
+  
+
+      <%= yield %>
+     
+
+
+
+
+<!-- <script src="assets/js/application.js"></script> -->
+
+</body>
+
+  <script src="/js/application/app.js"></script>
+  <script src="/js/application/services/Images.js"></script>
+  <script src="/js/application/controllers/LandingCtrl.js"></script>  
+  
+  <script>
+      
+       $(document).ready(function(){
+                                      $(document).foundation();
+                                    })
+
+  </script>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+<div class="col-1"></div>
+<div class="col-10">
+<h1>Thank You For Your Purchase!</h1>
+<% purchase = OrderCheckout.where(order_id: session[:order_id]).last.order_checkout_transactions.last%>
+<p>We will sortly ship out your product</p>
+<p>Your confirmation number is:<%= purchase.params["pal_button"] ? purchase.params["ipn_track_id"] : purchase.authorization%><p>
+<p>Please keep your confirmation number for your records.</p>  
+<p>Your card will be charged in the ammount of $<%= purchase.params["pal_button"] ? purchase.params["payment_gross"] : purchase.params["amount"]%></p>
+<button><%= link_to 'Return to Store', root_path %></button>
+
+<p>If you encounter any problems please <%= link_to "CONTACT US", contact_path%> for assistance</p>
+  </div>
+<div class="col-1"></div>

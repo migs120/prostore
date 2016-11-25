@@ -1,0 +1,5 @@
+ <% if this.destroy? %>
+   $('#order_checkout-' +<%= this.id %>).hide();
+ <% else %>
+   $('#order_checkout-' +<%= this.id %>).prepend("<div class='alert alert-danger'><%= flash[:error] %></div>");
+ <% end %>

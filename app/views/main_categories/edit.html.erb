@@ -1,0 +1,28 @@
+<%if $admin%>
+<% @MCategory = MainCategory.find(params[:id])%>
+<%= form_for @MCategory, :url => {:controller => 'main_categories', :action => 'update',  :method => 'post'} do |f| %>
+<%= f.label :title%>
+<%= f.text_field :title, class: 'form-control', placeholder: '' %>
+<%= f.label :body %>
+<%= f.text_area :body, rows: 4, class: 'form-control', placeholder: "Enter post body" %>
+<%= f.submit "Save", class: 'btn btn-success' %>
+
+<%end%>
+<br>
+<p>Click on Picture to Edit Picture</p>
+<%if @MCategory.main_category_pics.first%>
+      <%@MCategory.main_category_pics.each do |pic|%>
+        <%= link_to edit_main_category_main_category_pic_path(@MCategory.id, pic.id) do%>
+       <img src="<%= pic.pic_url_url%>" style='height:100px; width:100px;'>
+      <%end%>
+  <%end%>
+<%end%>
+
+
+
+
+<br><br><button><%= link_to 'Add New Pic to Category', new_main_category_main_category_pic_path(params[:id])%></button><br><br>
+<%= link_to "Delete Category", [MainCategory.find(params[:id])], method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this Category?' } %>
+<%end%>
+
+

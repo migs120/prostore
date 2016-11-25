@@ -1,0 +1,30 @@
+<div class="well">
+
+  <div class="row">
+    <div class="col-xs-8">
+      <h4><small><%= link_to item.title, main_category_item_path(item.main_category_id, item.id)  %></small></h4><br>
+       <% if item.item_pics.any?%>
+      <%pic = item.item_pics.first.pic_url.url%>
+      <%pic_seed = item.item_pics.first.urlseed %>
+      <img src="<%= pic == nil ? pic_seed : pic %>" style='height:100px; width:100px;'>
+      <%end%>
+    </div>
+    <div class="col-xs-4">
+      
+      <%= form_for order_item, remote: true do |f| %>
+      <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency item.price %></span></h4>
+        <div class="input-group">
+          <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
+          <div class="input-group-btn">
+            <%= f.hidden_field :item_id, value: item.id %>
+            <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <%if $admin%>
+      <br><button><%= link_to "Add Pics", new_main_category_item_item_pic_path(item.main_category_id, item.id)%></button>
+      <br><button><%= link_to "Edit Item", edit_main_category_item_path(params[:main_category_id], item.id) %></button>
+    <%end%>
+  </div>
+</div>

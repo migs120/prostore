@@ -1,0 +1,98 @@
+<%if $admin%>
+<style>
+table, th, tr, td { border:solid 1px;}
+</style>
+    <!-- clear zone3 -->
+<div class="col-m-12 col-12 seebox removempb" style="" style="border:2px solid red;">
+           <!--   left-side space -->
+          <div class="col-1 seebox"></div>
+  
+          <!--   center-div -->
+          <div class="col-10 seebox">
+
+             <h2>purchases.html.erb</h2>
+                    
+             <% OrderCheckout.all.each.with_index do |this, index = 1|%>
+                   
+             <% if this.purchased_at && !this.paid_shipped_n_done %>
+            
+             <div id="order_checkout-<%=this.id%>">
+               
+                          <table style="width:100%;">
+                            <tr>
+                              <th colspan="3">Order Checkout <%=index%></th>
+                            </tr>
+                            <tr>
+                              <th>key</th>
+                             <th>value</th>
+                            </tr>
+                            <% this.attributes.each do |j|%>
+                            <tr>
+                              <td><%=j[0]%></td>
+                              <td><%=j[1]%></td>
+                            </tr>
+                            <%end%>
+                          </table>
+            
+                     
+                                           
+                        <% this.order_checkout_transactions.each do |oct|%>
+                          <table style="width:100%;">
+                            <tr>
+                              <th colspan="3">Order Checkout Transaction</th>
+                            </tr>
+                            <tr>
+                              <th>key</th>
+                             <th>value</th>
+                            </tr>
+                            <% oct.attributes.each do |j|%>
+                            <tr>
+                              <td><%=j[0]%></td>
+                              <td><%=j[1]%></td>
+                            </tr>
+                            <%end%>
+                          </table>
+                            <%end%>
+            
+            
+                         <h4>items bought</h4>
+                         <%this.checkout_paid_items.each do |item|%>
+                                                 
+            
+                           <table style="width:100%;">
+                              <tr>
+                                <th colspan="3">Paid Item</th>
+                              </tr>
+                              <tr>
+                                <th>key</th>
+                               <th>value</th>
+                              </tr>
+                             <%item.attributes.each do |itema|%>
+                              <tr>
+                                <td><%=itema[0]%></td>
+                                <td><%=itema[1]%></td>
+                              </tr>
+                             <%end%>
+                            </table>
+                                      
+            
+                                         <%end%>
+                                  
+                                    <br>
+                                    <button><%= link_to "Done", [this], method: :put, remote: true %></button>
+
+                                    <p>===============================================================================</p>
+                                 </div>
+
+                   <%end%>
+  
+                          <!--   loop ends -->
+               <%end%>
+</div>
+  
+</div>
+  
+            <!--   right-side space -->
+            <div class="col-1 seebox"></div> 
+
+<%end%>

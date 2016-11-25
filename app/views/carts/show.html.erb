@@ -1,0 +1,17 @@
+<!-- left side div -->
+<div class="col-1"></div>
+
+<div class="col-10">
+<div class="shopping-cart">
+  <%= render "shopping_cart" %>
+</div>
+
+<div class="total">
+<%= render "total"%>
+</div>
+<button><%= link_to 'Continue Shopping', root_path%></button><br><br>
+<button><%= link_to 'Procced to checkout', new_order_checkout_path%></button>
+<br><br><br><br><br>
+</div>
+<!-- right side div -->
+<div class="col-1"></div>

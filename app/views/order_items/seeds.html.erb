@@ -1,0 +1,38 @@
+<div class="col-1 seebox"></div> 
+<div class="col-10 seebox">
+  
+
+  
+<h1>seeds creator</h1>
+ <% MainCategory.all.each do |category|%>
+
+  <%= "cat#{category.id}x"%> =  MainCategory.new(title: "<%=category.title%>", body: "<%=category.body%>", template: <%= category.template%>) <br><br>
+  
+  <hr>
+      <%category.main_category_pics.each do |pic|%>
+        <%= "cat#{category.id}x"%>.main_category_pics.build(pic_url:"<%=pic.pic_url.url%>", name: "<%= pic.name%>", urlseed: "<%= (pic.pic_url.url == "") | (pic.pic_url.url == nil) ? pic.urlseed : pic.pic_url%>")<br>
+         
+      <%end%>
+  <%= "cat#{category.id}x"%>.save!<br>
+  <hr>
+      <%category.items.each do |item|%>
+    <%="cat#{category.id}x#{item.id}x"%> = <%="cat#{category.id}x"%>.items.build(title:"<%=item.title%>", name: "<%= item.name%>", body: "<%= item.body%>", price: <%= item.price%>, active: <%= item.active%> )<br>
+    <%="cat#{category.id}x#{item.id}x"%>.save!<br>
+                <%item.item_pics.each do |ipic|%>
+                       Item.find(<%="cat#{category.id}x#{item.id}x"%>.id).item_pics.build(pic_url:"<%=ipic.pic_url.url%>", name: "<%= ipic.name%>", urlseed: "<%= (ipic.pic_url.url == "") | (ipic.pic_url.url == nil) ? ipic.urlseed : ipic.pic_url%>").save!<br>                               
+                <%end%>
+         
+      <%end%>  
+  <hr>
+  
+  
+  
+  
+ 
+  <p>#=====================================</p>
+<br>
+<%end%> 
+
+</div>
+<div class="col-1 seebox"></div> 
+

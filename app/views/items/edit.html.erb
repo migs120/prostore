@@ -1,0 +1,30 @@
+<%if $admin%>
+<% @item = Item.find(params[:id])%>
+<%= form_for @item, :url => {:controller => 'items', :action => 'update',  :method => 'post'} do |f| %>
+<%= f.label :title%>
+<%= f.text_field :title, class: 'form-control', placeholder: '' %>
+<%= f.label :body %>
+<%= f.text_area :body, rows: 4, class: 'form-control', placeholder: "Enter item body" %>
+<br><%= f.label :price%>
+<br><%= f.number_field :price, class: 'form-control', placeholder: "Enter A Price" %>
+<br><%= f.label :quantity%>
+<br><%= f.number_field :quantity, class: 'form-control', placeholder: "Enter quantity" %>
+<%= f.submit "Save", class: 'btn btn-success' %>
+
+<%end%>
+<br>
+<p>Click on Picture to Edit Picture</p>
+<%if @item.item_pics.first%>
+      <%@item.item_pics.each do |pic|%>
+        <%= link_to edit_main_category_item_item_pic_path(@item.main_category_id, @item.id, pic.id) do%>
+       <img src="<%= pic.pic_url_url%>" style='height:100px; width:100px;'>
+      <%end%>
+  <%end%>
+<%end%>
+
+
+
+
+<br><br><button><%= link_to 'Add New Pic to Item', new_main_category_item_item_pic_path(@item.main_category_id, @item.id)%></button><br><br>
+<%= link_to "Delete Item", [MainCategory.find(@item.main_category_id), Item.find(@item.id) ], method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this Category?' } %>
+<%end%>

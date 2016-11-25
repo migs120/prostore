@@ -1,0 +1,140 @@
+
+<% @item = Item.find(params[:id])%>
+<%if @item.item_pics.any?%>
+<%pic = @item.item_pics.first.pic_url.url%>
+<%pic_seed = @item.item_pics.first.urlseed%>
+<%end%>
+
+<%if 1==0%>
+<h3><%= link_to 'Back to Category Items', main_category_items_path(@item.main_category_id) %><h3>
+
+<h3><%= @item.title %></h3>
+<p>name:<%= @item.name %></p>
+<p><%= @item.body %></p>
+<p>price:<%= @item.price %></p>  
+<%if @item.item_pics.any?%>
+<%@item.item_pics.each do |pic|%>
+<img src="<%= pic.pic_url_url%>" style="height:150px; width:150px;">
+  
+<% end%>
+<%end %>
+  <br>
+
+  
+
+  
+     <%= form_for current_order.order_items.new, remote: true do |f| %>
+ 
+      <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency @item.price %></span></h4>
+        <div class="input-group">
+          <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
+          <div class="input-group-btn">
+            <%= f.hidden_field :item_id, value: @item.id %>
+            <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+  <% if $admin%>
+  <br><br><br><br><button><%= link_to 'ADD Pictures to Item', new_main_category_item_item_pic_path(params[:main_category_id], params[:id]) %></button>
+ <br><button><%= link_to "Edit Item", edit_main_category_item_path(@item.main_category_id, @item.id) %></button>
+  <%end%>
+  
+  <%end%>
+  
+<!--   ====================================test page 1======================================================= -->
+
+
+
+    <div class="row">
+      <div class="medium-6 columns">
+
+        <img class="thumbnail" src="<%= @item.item_pics.any? ? (pic == nil ? pic_seed : pic): "https://placehold.it/650x350"%>">
+        <div class="row small-up-4">
+          <div class="column">
+            <img class="thumbnail" src="<%= @item.item_pics.any? ? (pic == nil ? pic_seed : pic): "https://placehold.it/250x200"%>">
+          </div>
+          <div class="column">
+            <img class="thumbnail" src="https://placehold.it/250x200">
+          </div>
+          <div class="column">
+            <img class="thumbnail" src="https://placehold.it/250x200">
+          </div>
+          <div class="column">
+            <img class="thumbnail" src="https://placehold.it/250x200">
+          </div>
+        </div>
+      </div>
+      <div class="medium-6 large-5 columns">
+        <h3><%= @item.title %></h3>
+        <p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus tortor. Nulla facilisi. Duis aliquet egestas purus in.</p>
+
+
+
+        
+
+      <%= form_for current_order.order_items.new, remote: true do |f| %>
+      <div class="row">
+          <div class="small-3 columns">
+          <label for="middle-label" class="middle">Quantity<br><%= @item.quantity%> available</label>
+             <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
+          </div>
+          <div class="small-9 columns"> 
+          </div>
+      </div>
+
+      <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency @item.price %></span></h4>
+        <div class="input-group">
+          <div class="input-group-btn">
+            <%= f.hidden_field :item_id, value: @item.id %>
+            <%= f.submit "Add to Cart", class: "button large expanded" %>
+          </div>
+        </div>
+      <% end %>
+
+        
+        
+        
+        
+
+        <div class="small secondary expanded button-group">
+            <a class="button">Facebook</a>
+            <a class="button">Twitter</a>
+            <a class="button">Yo</a>
+          </div>
+        </div>
+    </div>
+
+ 
+
+    <div class="row column">
+      <hr>
+      <ul class="menu">
+       
+        <li>
+          <%= link_to root_path do%>
+          <p style="color:white;">Home</p>
+          <%end%>
+        </li>
+        <li>
+          <%= link_to about_path do%>
+          <p style="color:white;">About</p>
+          <%end%>
+        </li>
+        <li>
+          <%= link_to contact_path do%>
+          <p style="color:white;">Contact</p>
+          <%end%>
+        </li>
+        <li class="float-right">Copyright 2016</li>
+      </ul>
+    </div>
+
+
+    
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  
+  

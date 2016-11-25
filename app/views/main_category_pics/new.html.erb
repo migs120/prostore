@@ -1,0 +1,14 @@
+<%if $admin%>
+<%= form_for MainCategoryPic.new, :url => {:controller => 'main_category_pics', :action => 'create',  :method => 'post'} do |f| %>
+       <div class="form-group">
+         <%= f.label :name %><br>
+         <%= f.text_field :name %><br> 
+         <%= f.label :description %><br>
+         <%= f.text_field :description %><br>          
+         <%= f.label :pic_url %>
+         <%= f.file_field :pic_url %>
+         <%= f.hidden_field :pic_url_cache %>
+       </div>
+        <%= f.submit "Update", class: 'btn btn-success' %>
+<%end%>
+<%end%>

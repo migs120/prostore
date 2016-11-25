@@ -1,0 +1,18 @@
+<%if $admin%>
+<h1>Create New Item</h1>
+
+<br>
+<%= form_for Item.new, :url => {:controller => 'items', :action => 'create',  :method => 'post'} do |f|%>
+<br><%= f.label :title%>
+<br><%= f.text_field :title, class: 'form-control', placeholder: "Enter A name" %>
+<br><%= f.label :name%>
+<br><%= f.text_field :name, class: 'form-control', placeholder: "Enter A name" %>
+<br><%= f.label :price%>
+<br><%= f.number_field :price, class: 'form-control', placeholder: "Enter A Price" %>
+<br><%= f.label :quantity%>
+<br><%= f.number_field :quantity, class: 'form-control', placeholder: "Enter quantity" %>
+<%= f.label :body %>
+<%= f.text_area :body, rows: 5, class: 'form-control', placeholder: "Enter description" %>
+<%= f.submit "Save", class: 'btn btn-success' %>
+    <% end %>
+<%end%>

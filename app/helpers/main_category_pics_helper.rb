@@ -1,0 +1,2 @@
+module MainCategoryPicsHelper
+end

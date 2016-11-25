@@ -1,0 +1,16 @@
+<%if $admin%>
+<h1>Create New Categroy</h1>
+
+<br>
+<%= form_for MainCategory.new, :url => {:controller => 'main_categories', :action => 'create',  :method => 'post'} do |f|%>
+<br><%= f.label :title%>
+<br><%= f.text_field :title, class: 'form-control', placeholder: "Enter A Title" %>
+<%= f.label :body %>
+<%= f.text_area :body, rows: 5, class: 'form-control', placeholder: "Enter description" %>
+<%= f.label "Template?" %>
+<%= f.check_box :template, {}, true, false %> <br />
+
+<%= f.submit "Save", class: 'btn btn-success' %>
+    <% end %>
+
+<%end%>

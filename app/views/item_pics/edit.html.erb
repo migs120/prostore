@@ -1,0 +1,25 @@
+<%if $admin%>
+<% @item = Item.find(params[:item_id])%>
+<% @item_pics = Item.find(params[:item_id]).item_pics%>
+<% @item_pic = ItemPic.find(params[:id])%>
+this is an selected item pic 
+
+should only have one item to edit or delete
+<br><img src="<%=@item_pic.pic_url_url%>" style="height:150px; width:150px;"><br>
+<%= form_for @item_pic, :url => {:controller => 'item_pics', :action => 'update',  :method => 'post'} do |f| %>
+       <div class="form-group">
+         <%= f.label :name %><br>
+         <%= f.text_field :name %><br> 
+         <%= f.label :description %><br>
+         <%= f.text_area :description, rows: 6 %><br>  
+         <%= f.label :pic_url %>
+         <%= f.file_field :pic_url %>
+         <%= f.hidden_field :pic_url_cache %>
+       </div>
+        <%= f.submit "Update", class: 'btn btn-success' %>
+<%end%>
+
+<br><%= link_to "Delete This Picture From Item", [ MainCategory.find(@item.main_category_id), @item , @item_pic   ], method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this Category?' } %>
+<%end%>
+
+

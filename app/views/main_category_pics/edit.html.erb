@@ -1,0 +1,16 @@
+<%if $admin%>
+<%@pic = MainCategoryPic.find(params[:id])%>
+<img src="<%= @pic.pic_url_url%>" >
+<br>
+<%= form_for [@pic.main_category,@pic] do |f| %>
+         <%= f.label :name %><br>
+         <%= f.text_field :name %><br> 
+         <%= f.label :description %><br>
+         <%= f.text_field :description %><br> 
+         <%= f.label :"change Picture" %>
+         <%= f.file_field :pic_url %>
+         <%= f.hidden_field :pic_url_cache %>
+<%= f.submit "Save" %>
+<% end %>
+<br>
+<%end%>

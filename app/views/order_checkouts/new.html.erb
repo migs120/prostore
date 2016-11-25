@@ -1,0 +1,158 @@
+
+ 
+<div class="col-1"></div>
+
+<div class="col-10" style="display:none;" id="instore-form">
+  
+  <div class="col-11 col-p-11" style="margin:30px;">
+    
+  <%= link_to paypal_path, method: :post do %> 
+  <img src="/images/paypal.gif" class="center" style=" float:right; width:180px; height:60px;"><br>
+    <%end%>
+  <img src="/images/hand.gif" class="center" style="float:right; width:40px; height:40px;">
+</div>
+  
+<!--   right-aside space for image-->
+  <div class="col-1 col-p-1"></div>
+  
+ 
+  
+  
+  
+  
+<%= form_for OrderCheckout.new, :url => {:controller => 'order_checkouts', :action => 'create',  :method => 'post'} do |f| %>
+
+<h3>Shipping Address</h3>
+  
+  <p>
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, placeholder: current_order.order_checkouts.any? ? current_order.order_checkouts.last.first_name : '' %>
+  </p>
+  <p>
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name , placeholder: current_order.order_checkouts.any? ? current_order.order_checkouts.last.last_name : ''  %>
+  </p>
+
+ <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email , placeholder: current_order.order_checkouts.any? ? current_order.order_checkouts.last.email : ''  %>
+  </p>
+
+ <p>
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone , placeholder: current_order.order_checkouts.any? ? current_order.order_checkouts.last.phone : '' %>
+  </p>
+
+ <p>
+    <%= f.label :adress %><br />
+    <%= f.text_field :adress , placeholder: current_order.order_checkouts.any? ? current_order.order_checkouts.last.adress : ''  %>
+  </p>
+
+ <p>
+    <%= f.label :city %><br />
+    <%= f.text_field :city , placeholder: current_order.order_checkouts.any? ? current_order.order_checkouts.last.city : ''  %>
+  </p>
+
+ <p>
+    <%= f.label :state %><br />
+    <%= f.text_field :state , placeholder: current_order.order_checkouts.any? ? current_order.order_checkouts.last.state : ''  %>
+  </p>
+
+ <p>
+    <%= f.label :zip %><br />
+    <%= f.number_field :zip , placeholder: current_order.order_checkouts.any? ? current_order.order_checkouts.last.zip : ''  %>
+  </p>
+
+
+
+
+
+<h3>Billing adress</h3>
+ <p>
+    <%= f.label :bill_name %><br />
+    <%= f.text_field :bill_name , placeholder: current_order.order_checkouts.any? ? current_order.order_checkouts.last.bill_name : ''  %>
+  </p>
+ <p>
+    <%= f.label :bill_adress %><br />
+    <%= f.text_field :bill_adress , placeholder: current_order.order_checkouts.any? ? current_order.order_checkouts.last.bill_adress : ''  %>
+  </p>
+
+ <p>
+    <%= f.label :bill_city %><br />
+    <%= f.text_field :bill_city , placeholder: current_order.order_checkouts.any? ? current_order.order_checkouts.last.bill_city : ''  %>
+  </p>
+
+ <p>
+    <%= f.label :bill_state %><br />
+    <%= f.text_field :bill_state , placeholder: current_order.order_checkouts.any? ? current_order.order_checkouts.last.bill_state : ''  %>
+  </p>
+
+ <p>
+    <%= f.label :bill_zip %><br />
+    <%= f.number_field :bill_zip , placeholder: current_order.order_checkouts.any? ? current_order.order_checkouts.last.bill_zip : ''  %>
+  </p>
+
+  <p>
+    <%= f.label :card_type %><br />
+    <%= f.select :card_type, [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]] %>
+  </p>
+  <p>
+    <%= f.label :card_number %><br />
+    <%= f.text_field :card_number %>
+  </p>
+  <p>
+    <%= f.label :card_verification, "Card Verification Value (CVV)" %><br />
+    <%= f.text_field :card_verification %>
+  </p>
+  <p>
+    <%= f.label :card_expires_on %><br />
+    <%= f.date_select :card_expires_on, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :add_month_numbers => true %>
+  </p>
+
+<h4>special instuctions if any</h4>
+ <p>
+    <%= f.label :instructions %><br />
+    <%= f.text_area :instructions, rows: 5  %>
+  </p>
+
+  <p><%= f.submit "Submit" %></p>
+<% end %>
+<br>
+</div>
+<div id="pay-type" class="col-10 vhcenterp see box" style="height:100%;">
+      <div class="col-12 vhcenters seebox center">
+    <button class="center new-checkout-b" id="instore-checkout-button" style="">in-store checkout</button><br>
+        <%= link_to paypal_path, method: :post do %> 
+    <button class="center new-checkout-b" style="" >paypal express</button><br>
+        <img src="/images/paypal.gif">
+        <%end%>
+      </div>
+</div>
+
+<div class="col-1"></div>
+
+
+
+
+
+
+
+
+<script>
+
+
+$(document).ready(function(){
+    		                      $("#instore-checkout-button").click(function(){
+        		                                                                  $("#instore-form").show();
+                                                                              $("#pay-type").hide();
+                                                                                
+                                                                            });
+                            });
+
+
+
+
+
+</script>
+
+
