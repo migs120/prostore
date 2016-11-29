@@ -5,41 +5,7 @@
 <%pic_seed = @item.item_pics.first.urlseed%>
 <%end%>
 
-<%if 1==0%>
-<h3><%= link_to 'Back to Category Items', main_category_items_path(@item.main_category_id) %><h3>
 
-<h3><%= @item.title %></h3>
-<p>name:<%= @item.name %></p>
-<p><%= @item.body %></p>
-<p>price:<%= @item.price %></p>  
-<%if @item.item_pics.any?%>
-<%@item.item_pics.each do |pic|%>
-<img src="<%= pic.pic_url_url%>" style="height:150px; width:150px;">
-  
-<% end%>
-<%end %>
-  <br>
-
-  
-
-  
-     <%= form_for current_order.order_items.new, remote: true do |f| %>
- 
-      <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency @item.price %></span></h4>
-        <div class="input-group">
-          <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
-          <div class="input-group-btn">
-            <%= f.hidden_field :item_id, value: @item.id %>
-            <%= f.submit "Add to Cart", class: "btn btn-primary" %>
-          </div>
-        </div>
-      <% end %>
-  <% if $admin%>
-  <br><br><br><br><button><%= link_to 'ADD Pictures to Item', new_main_category_item_item_pic_path(params[:main_category_id], params[:id]) %></button>
- <br><button><%= link_to "Edit Item", edit_main_category_item_path(@item.main_category_id, @item.id) %></button>
-  <%end%>
-  
-  <%end%>
   
 <!--   ====================================test page 1======================================================= -->
 
@@ -66,7 +32,7 @@
       </div>
       <div class="medium-6 large-5 columns">
         <h3><%= @item.title %></h3>
-        <p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus tortor. Nulla facilisi. Duis aliquet egestas purus in.</p>
+        <p><%= @item.body%></p>
 
 
 
