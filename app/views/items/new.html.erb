@@ -1,4 +1,6 @@
 <%if $admin%>
+<div class="col-1"></div>
+<div class="col-10">
 <h1>Create New Item</h1>
 
 <br>
@@ -15,4 +17,9 @@
 <%= f.text_area :body, rows: 5, class: 'form-control', placeholder: "Enter description" %>
 <%= f.submit "Save", class: 'btn btn-success' %>
     <% end %>
+</div>    
+<div class="col-1"></div>    
+    
+    
+    
 <%end%>
