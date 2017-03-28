@@ -11,17 +11,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="/css/main_categories/index.css">
   
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
   
-
  
 </head>
 
 
-<body ng-app="myapp" ng-controller="LandingCtrl">
-    
-   
+<!--<body ng-app="myapp" ng-controller="LandingCtrl">-->
+   <!--<body ng-app="myapp" >-->
+   <body>
 <!-- top menu bar -->
  
 <div class="col-m-12 col-12 seebox " style=" background-color:#5F5F5F; position:fixed; z-index: 5;" >
@@ -110,9 +110,50 @@
 
 </body>
 
-  <script src="/js/application/app.js"></script>
-  <script src="/js/application/services/Images.js"></script>
-  <script src="/js/application/controllers/LandingCtrl.js"></script>  
+  <!--<script src="/js/application/app.js"></script>-->
+<script> //(  function(){angular.module("myapp", ["ngRoute"])}  )(); </script>
+  
+  
+  <script>
+var app = angular.module("myapp", ["ngRoute"]);
+
+angular.module("myapp").config(function($locationProvider, $routeProvider) {
+    $locationProvider.html5Mode(false).hashPrefix('');
+    $routeProvider
+    .when("/", {
+        templateUrl : "main.htm",
+        controller : "LandingCtrl"
+    })
+    .when("/london", {
+        templateUrl : "london.htm",
+        controller : "londonCtrl"
+    })
+    .when("/paris", {
+        templateUrl : "paris.htm",
+        controller : "parisCtrl"
+    }).otherwise({ redirectTo: '/' });
+});
+
+function Image($rootScope) {
+                               var Image = { 
+                                            logo: "https://s3-us-west-2.amazonaws.com/pics120/migtech+store/main_categories/index/A-Many-CellPhones.jpg", 
+                                            logoN: "https://s3-us-west-2.amazonaws.com/pics120/migtech+store/main_categories/index/logot.png"
+                                           };
+                                   
+                                return Image;
+                            }
+                            
+                            
+function londontion($scope){$scope.msg = "I love London migs adjusted";}
+function paristion($scope){ $scope.msg = "I love Paris";}
+function LandingCtrl($scope,Image) { $scope.image = Image ; }
+                                    
+app.factory('Image', ['$rootScope',Image]);
+app.controller("londonCtrl",['$scope',londontion]);
+app.controller("parisCtrl",['$scope',paristion] );
+app.controller("LandingCtrl", ["$scope","Image", LandingCtrl]);
+</script>
+
   
   <script>
       

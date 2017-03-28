@@ -1,1 +1,1 @@
-(function(){angular.module("myapp", [])})();
+(  function(){angular.module("myapp", [])}  )();

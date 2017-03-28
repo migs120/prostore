@@ -1,4 +1,6 @@
 
+<div class='col-12' ng-app="myapp">
+    
 <style >
   .seebox1 {
             outline:dotted;
@@ -9,11 +11,18 @@
 </style>
 
 
+
+<a href="#london">City 1</a>
+<a href="#paris">City 2</a><br>
+
+
+
 <div class="col-1"></div>
 
-<div class="col-10  height" id="logo" ng-style="{'background-image':'url({{image.logo}})'}">
-    <img id="logoN" ng-src="{{image.logoN}}" >
-</div>
+<!--<div class="col-10  height" id="logo" ng-style="{'background-image':'url({{image.logo}})'}">-->
+<!--    <img id="logoN" ng-src="{{image.logoN}}" >-->
+<!--</div>-->
+<div class='col-10' ng-view></div>
 
 <div class="col-1"></div>
 
@@ -45,8 +54,8 @@
    <%if !category.template%>
             <div class="column">
               <%= link_to main_category_path(category.id) do%>
-              <%pic = category.main_category_pics.first.pic_url.url%>
-              <%pic_escape = category.main_category_pics.first.urlseed%>
+              <%pic = category.main_category_pics.first ? category.main_category_pics.first.pic_url.url : nil %>
+              <%pic_escape = category.main_category_pics.first ? category.main_category_pics.first.urlseed : nil %>
               <img class="thumbnail" src="<%= category.main_category_pics.any? ? ((pic == nil) | (pic == "") ? pic_escape : pic) : "https://placehold.it/550x550"%>">
               <%end%>
               <h5><%= category.title%></h5><%= link_to "Edit-items", main_category_items_path(category.id)%>
@@ -273,7 +282,7 @@
       
       
       
-      
+</div>      
       
       
       
