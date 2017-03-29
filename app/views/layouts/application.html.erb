@@ -114,45 +114,6 @@
 <script> //(  function(){angular.module("myapp", ["ngRoute"])}  )(); </script>
   
   
-  <script>
-var app = angular.module("myapp", ["ngRoute"]);
-
-angular.module("myapp").config(function($locationProvider, $routeProvider) {
-    $locationProvider.html5Mode(false).hashPrefix('');
-    $routeProvider
-    .when("/", {
-        templateUrl : "main.htm",
-        controller : "LandingCtrl"
-    })
-    .when("/london", {
-        templateUrl : "london.htm",
-        controller : "londonCtrl"
-    })
-    .when("/paris", {
-        templateUrl : "paris.htm",
-        controller : "parisCtrl"
-    }).otherwise({ redirectTo: '/' });
-});
-
-function Image($rootScope) {
-                               var Image = { 
-                                            logo: "https://s3-us-west-2.amazonaws.com/pics120/migtech+store/main_categories/index/A-Many-CellPhones.jpg", 
-                                            logoN: "https://s3-us-west-2.amazonaws.com/pics120/migtech+store/main_categories/index/logot.png"
-                                           };
-                                   
-                                return Image;
-                            }
-                            
-                            
-function londontion($scope){$scope.msg = "I love London migs adjusted";}
-function paristion($scope){ $scope.msg = "I love Paris";}
-function LandingCtrl($scope,Image) { $scope.image = Image ; }
-                                    
-app.factory('Image', ['$rootScope',Image]);
-app.controller("londonCtrl",['$scope',londontion]);
-app.controller("parisCtrl",['$scope',paristion] );
-app.controller("LandingCtrl", ["$scope","Image", LandingCtrl]);
-</script>
 
   
   <script>
