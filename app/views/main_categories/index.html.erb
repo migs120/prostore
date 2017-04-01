@@ -313,17 +313,17 @@ function Image($rootScope) {
                                    
                                 return Image;
                             };
-function Umage($rootScope) {
-                               var Umage =  <%=raw item_json%>;
+function Items($rootScope) {
+                               var Items =  <%=raw JSON.pretty_generate(Item.all.as_json)%>
                                    
-                                return Umage;
+                                return Items;
                             };                            
                             
-function londontion($scope,Umage){$scope.msg = "I love London migs adjusted", $scope.Items = Umage; }
+function londontion($scope,Items){$scope.msg = "I love London migs adjusted", $scope.items = Items; }
 function paristion($scope){ $scope.msg = "I love Paris";}
 function LandingCtrl($scope,Image) { $scope.image = Image ; }
 
-app.factory('Umage', ['$rootScope',Umage]);                                    
+app.factory('Umage', ['$rootScope',Items]);                                    
 app.factory('Image', ['$rootScope',Image]);
 
 app.controller("londonCtrl",['$scope','Umage',londontion]);
