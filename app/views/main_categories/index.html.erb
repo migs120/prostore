@@ -314,22 +314,7 @@ function Image($rootScope) {
                                 return Image;
                             };
 function Umage($rootScope) {
-                               var Umage = { 
-                                         
-                                           <% lastd = Item.last.id %>
-                                           <% Item.all.each.with_index do |item, index|%>
-                                          
-                                                   <% if item.id != lastd %>
-                                                       <%= "item#{index}" %>:{<% item.attributes.each do |value| %>
-                                                            <%=value[0]%>:'<%="#{value[1]}"%>'<%= value[0]=="quantity" ? "" : "," %><%end%> } 
-                                                       <% else %>
-                                                        <%="item#{index}" %>:{<% item.attributes.each do |value| %>
-                                                            <%=value[0]%>:'<%="#{value[1]}"%>'<%= value[0]=="quantity" ? "" : "," %> <%end%>
-                                                        },
-                                                   <% end%>
-                                           <% end%>
-                                           
-                                           };
+                               var Umage =  <%=raw item_json%>;
                                    
                                 return Umage;
                             };                            
@@ -347,8 +332,8 @@ app.controller("LandingCtrl", ["$scope","Image", LandingCtrl]);
 </script>
      
       
-      
-      
+      <%#=raw item_json %>
+     
       
       
       

@@ -38,6 +38,7 @@ class ItemsController < ApplicationController
     render  "items/checkout"
   end
   
+
   
   
 end

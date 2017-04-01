@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
     before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :admin
-   helper_method :current_order
+   helper_method :current_order, :item_json
    rescue_from Pundit::NotAuthorizedError do |exception|
      redirect_to root_url, alert: exception.message
    end
@@ -35,6 +35,13 @@ end
       Order.create()
     end
   end
+  
+    def item_json
+   # p "#{Item.all.as_json.to_s}"
+    JSON.pretty_generate(Item.all.as_json)
+  end
+  
+  
  
    protected
  
