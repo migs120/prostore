@@ -312,15 +312,36 @@ function Image($rootScope) {
                                            };
                                    
                                 return Image;
-                            }
+                            };
+function Umage($rootScope) {
+                               var Umage = { 
+                                         
+                                           <% lastd = Item.last.id %>
+                                           <% Item.all.each.with_index do |item, index|%>
+                                          
+                                                   <% if item.id != lastd %>
+                                                       <%= "item#{index}" %>:{<% item.attributes.each do |value| %>
+                                                            <%=value[0]%>:'<%="#{value[1]}"%>'<%= value[0]=="quantity" ? "" : "," %><%end%> } 
+                                                       <% else %>
+                                                        <%="item#{index}" %>:{<% item.attributes.each do |value| %>
+                                                            <%=value[0]%>:'<%="#{value[1]}"%>'<%= value[0]=="quantity" ? "" : "," %> <%end%>
+                                                        },
+                                                   <% end%>
+                                           <% end%>
+                                           
+                                           };
+                                   
+                                return Umage;
+                            };                            
                             
-                            
-function londontion($scope){$scope.msg = "I love London migs adjusted";}
+function londontion($scope,Umage){$scope.msg = "I love London migs adjusted", $scope.Items = Umage; }
 function paristion($scope){ $scope.msg = "I love Paris";}
 function LandingCtrl($scope,Image) { $scope.image = Image ; }
-                                    
+
+app.factory('Umage', ['$rootScope',Umage]);                                    
 app.factory('Image', ['$rootScope',Image]);
-app.controller("londonCtrl",['$scope',londontion]);
+
+app.controller("londonCtrl",['$scope','Umage',londontion]);
 app.controller("parisCtrl",['$scope',paristion] );
 app.controller("LandingCtrl", ["$scope","Image", LandingCtrl]);
 </script>

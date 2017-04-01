@@ -7,6 +7,8 @@ class OrderItem < ActiveRecord::Base
   validate :order_present
 
   before_save :finalize
+ 
+
 
   def unit_price
     if persisted?
