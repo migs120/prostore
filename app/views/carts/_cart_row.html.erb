@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-xs-8">
       <h4><%= item.name %></h4><br>
-      <img src="<%=item.item_pics.first.pic_url.url%>" style="width:200px;">
+      <img src="<%=item.item_pics.first ? item.item_pics.first.pic_url.url : '' %>" style="width:200px;">
     </div>
     <div class="col-xs-4">
       
