@@ -75,17 +75,17 @@
        
      
        <% if flash[:notice] %>
-         <div class="alert alert-success">
+         <div class="alert alert-success" onclick="hide()" id='flash'>
            <button type="button" class="close" data-dismiss="alert">&times;</button>
            <%= flash[:notice] %>
          </div>
        <% elsif flash[:error] %>
-         <div class="alert alert-danger">
+         <div class="alert alert-danger" onclick="hide()" id='flash'>
            <button type="button" class="close" data-dismiss="alert">&times;</button>
            <%= flash[:error] %>
          </div>
        <% elsif flash[:alert] %>
-         <div class="alert alert-warning">
+         <div class="alert alert-warning" onclick="hide()" id='flash'>
            <button type="button" class="close" data-dismiss="alert">&times;</button>
            <%= flash[:alert] %>
          </div>
@@ -104,6 +104,12 @@
      
 
 </body>
+
+   <script>
+ 
+     function hide(){ $('.close').click($('#flash').hide()) }
+    
+   </script>
 
 </html>
 

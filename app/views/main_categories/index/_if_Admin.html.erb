@@ -13,7 +13,7 @@
 
 
  <div class="row small-up-2 medium-up-3 large-up-4">
-   <% MainCategory.all.each do |category|%>
+ <% MainCategory.all.each do |category| %>
    <%if !category.template%>
             <div class="column">
               <%= link_to main_category_path(category.id) do%>
