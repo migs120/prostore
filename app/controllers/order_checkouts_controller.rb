@@ -102,7 +102,7 @@ class OrderCheckoutsController < ApplicationController
                        #item_sub_category:@item.sub_category_id
                        }
             values = {
-                      business: "migs432-facilitator@yahoo.com ",
+                      business: "migs432-facilitator@yahoo.com",
                       cmd: "_cart",
                       upload: 1,
                       return: "#{request.base_url}/thank_you",#/pal_return?user_id=#{@retun_values[:order_id]}&authenticity_token=#{form_authenticity_token}&pal_button=true&method=post",
