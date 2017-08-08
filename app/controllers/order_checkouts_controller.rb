@@ -133,6 +133,9 @@ class OrderCheckoutsController < ApplicationController
   end
   
   
+  
+  #paypal express
+  
   def pal_return
 #=begin
    
@@ -162,7 +165,7 @@ class OrderCheckoutsController < ApplicationController
                                 bill_state:  params[:address_state] ,
                                 bill_zip: params[:address_zip] ,  
                                 instructions: params.to_s
-                                )
+                                ).save
     
    @Order = Order.find(params[:order_id])
     @OrderCheckout = @Order.order_checkouts.last
@@ -177,28 +180,24 @@ class OrderCheckoutsController < ApplicationController
           end
       end   
     
+    
+     logger.debug puts "
+                      debbuger
+                      \n @Order.order_items.inspect-> #{@Order.order_items.inspect }
+                      
+                      " 
+    
       
-    @Order.order_items.destroy_all
+    @Order.order_items.all.delete_all
     
 #=end
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
     
   end
+  
+  
   
   
   
