@@ -188,9 +188,11 @@ class OrderCheckoutsController < ApplicationController
                       " 
     
       
-    Mailer.email("migs@hotmail.com")  
+     
       
     @Order.order_items.all.delete_all
+    
+    Mailer.email("migs@hotmail.com") 
     
 #=end
     
