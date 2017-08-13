@@ -192,7 +192,7 @@ class OrderCheckoutsController < ApplicationController
       
     @Order.order_items.all.delete_all
     
-    Mailer.email("migs@hotmail.com") 
+    #Mailer.email("migs@hotmail.com") 
     
 #=end
     
