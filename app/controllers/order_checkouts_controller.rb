@@ -101,26 +101,51 @@ class OrderCheckoutsController < ApplicationController
                       # email: current_user.email,
                        #item_sub_category:@item.sub_category_id
                        }
+                       
+                       
+                       
+                       
+                       
             values = {
-                      business: "migs432-facilitator@yahoo.com",
-                      cmd: "_cart",
-                      upload: 1,
-                      return: "#{request.base_url}/thank_you",#/pal_return?user_id=#{@retun_values[:order_id]}&authenticity_token=#{form_authenticity_token}&pal_button=true&method=post",
-                      notify_url: "#{request.base_url}/pal_return?order_id=#{@retun_values[:order_id]}&authenticity_token=#{form_authenticity_token}&pal_button=true&method=post",
+                
+                      business:     "migs432-facilitator@yahoo.com",
+                      
+                      cmd:          "_cart",
+                      
+                      upload:       1,
+                      
+                      return:       "#{request.base_url}/thank_you",      #/pal_return?user_id=#{@retun_values[:order_id]}&authenticity_token=#{form_authenticity_token}&pal_button=true&method=post",
+                      
+                      
+                      notify_url:   "#{request.base_url}/pal_return"+
+                                    "?order_id=#{@retun_values[:order_id]}"+
+                                    "&authenticity_token=#{form_authenticity_token}"+
+                                    "&pal_button=true"+
+                                    "&method=post",
+                                    
+                                  
                       handling_cart: "4.00",
+                      
                       shopping_url: "#{request.base_url}/"
+                      
                       #display: "1"
+                      
+                      
                       }
       
       current_order.order_items.each_with_index do |item, index|
+          
                         values.merge!({
-                                      # :add => "#{index+1}",  
+                            
+                                      #:add => "#{index+1}",  
                                        :"amount_#{index+1}" => item.unit_price.to_s,
                                        :"item_name_#{index+1}"=> Item.find(item.item_id).name,
                                        :"item_number_#{index+1}"=> item.item_id,
                                        :"quantity_#{index+1}"=> item.quantity,
                                     })
                       end
+                      
+                      
          redirect_to "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
       
      else
@@ -168,15 +193,23 @@ class OrderCheckoutsController < ApplicationController
                                 ).save
     
    @Order = Order.find(params[:order_id])
-    @OrderCheckout = @Order.order_checkouts.last
+   
+   @OrderCheckout = @Order.order_checkouts.last
     
- # OrderCheckoutTransaction.create!(order_checkout_id:params[:order_id],success: true, params: params.to_s, authorization: params[:payment_status],  :amount => params[:payment_gross]).default_connection_handler
-    @OrderCheckout.order_checkout_transactions.create!(success: true, params: params, authorization: params[:payment_status],  :amount => params[:payment_gross]).default_connection_handler
-    #order_checkout_transactions.palreturn(params)
-         @OrderCheckout.update_attributes(purchased_at: DateTime.now  )     
-       @Order.order_items.each do |item|
+   #OrderCheckoutTransaction.create!(order_checkout_id:params[:order_id],success: true, params: params.to_s, authorization: params[:payment_status],  :amount => params[:payment_gross]).default_connection_handler
+   
+   @OrderCheckout.order_checkout_transactions.create!(success: true, params: params, authorization: params[:payment_status],  :amount => params[:payment_gross]).default_connection_handler
+   
+   #order_checkout_transactions.palreturn(params)
+   
+   @OrderCheckout.update_attributes(purchased_at: DateTime.now  )
+   
+   @Order.order_items.each do |item|
+       
          Item.find(item.item_id) do |itemIn|
+             
            OrderCheckout.find(@OrderCheckout.id).checkout_paid_items.create(title: itemIn.title, name: itemIn.name, price:itemIn.price, body: itemIn.body)
+           
           end
       end   
     
