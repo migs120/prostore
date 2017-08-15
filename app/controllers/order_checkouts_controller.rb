@@ -53,9 +53,17 @@ class OrderCheckoutsController < ApplicationController
           end
       end   
     
-      current_order.order_items.destroy_all
+      current_order.order_items.all.delete_all
       #render :action => "success"
       redirect_to thank_you_path
+      
+          if Rails.env.production?
+            
+                logger.debug puts "\n Rails.env.production?-> #{Rails.env.production? }"
+                Mailer.email("migs@hotmail.com") 
+            
+          end
+      
     else
      
       render :action => "failure"
@@ -108,7 +116,7 @@ class OrderCheckoutsController < ApplicationController
                        
             values = {
                 
-                      business:     "migs432-facilitator@yahoo.com",
+                      business:     Rails.env.production? ? "migs432@yahoo.com " : "migs432-facilitator@yahoo.com ",
                       
                       cmd:          "_cart",
                       
@@ -146,7 +154,20 @@ class OrderCheckoutsController < ApplicationController
                       end
                       
                       
-         redirect_to "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+                     
+              if !Rails.env.production?             
+                    logger.debug puts "
+                                  debbuger
+                                 
+                                  \n CGI::escape->\n #{values.to_query }
+                                  \n vs
+                                  \n CGI::unescape-> \n #{CGI::unescape(values.to_query) }
+                                  "               
+               end       
+               
+               
+                      
+         redirect_to (Rails.env.production? ? "https://www.paypal.com/cgi-bin/webscr?" : "https://www.sandbox.paypal.com/cgi-bin/webscr?") + values.to_query
       
      else
          flash[:error] = "There was an error saving the Category. Please try again."
@@ -164,7 +185,7 @@ class OrderCheckoutsController < ApplicationController
   def pal_return
 #=begin
    
-    OrderCheckout.create(instructions: params.to_s)
+    #OrderCheckout.create(instructions: params.to_s)
    
     
    # redirect_to root_path
@@ -216,8 +237,8 @@ class OrderCheckoutsController < ApplicationController
     
      logger.debug puts "
                       debbuger
-                      \n @Order.order_items.inspect-> #{@Order.order_items.inspect }
-                      
+                      \n @Order.order_items.inspect->\n #{@Order.order_items.inspect }
+                      \n Rails.env.production?-> #{Rails.env.production? }
                       " 
     
       
@@ -225,8 +246,13 @@ class OrderCheckoutsController < ApplicationController
       
     @Order.order_items.all.delete_all
     
-    Mailer.email("migs@hotmail.com") 
-    
+    if Rails.env.production?
+        
+       logger.debug puts "\n Rails.env.production?-> #{Rails.env.production? }"
+       
+        Mailer.email("migs@hotmail.com") 
+        
+    end
 #=end
     
     
