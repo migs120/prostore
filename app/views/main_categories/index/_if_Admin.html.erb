@@ -18,8 +18,8 @@
             <div class="column">
               <%= link_to main_category_path(category.id) do%>
               <%if category.main_category_pics.any?%>
-              <%pic = category.main_category_pics.first.pic_url.url%>
-              <%pic_escape = category.main_category_pics.first.urlseed%>
+                  <%pic = category.main_category_pics.first.pic_url.url%>
+                  <%pic_escape = category.main_category_pics.first.urlseed%>
               <%end%>
               <img class="thumbnail" src="<%= category.main_category_pics.any? ? ((pic == nil) | (pic == "") ? pic_escape : pic) : "https://placehold.it/550x550"%>">
               <%end%>
