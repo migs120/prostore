@@ -116,7 +116,7 @@ class OrderCheckoutsController < ApplicationController
                        
             values = {
                 
-                      business:     Rails.env.production? ? "migs432@yahoo.com " : "migs432-facilitator@yahoo.com ",
+                      business:     (Rails.env.production? ? "migs432@yahoo.com " : "migs432-facilitator@yahoo.com"),
                       
                       cmd:          "_cart",
                       
