@@ -253,6 +253,7 @@ class OrderCheckoutsController < ApplicationController
         Mailer.email("migs@hotmail.com") 
         
     end
+
 #=end
     
     
