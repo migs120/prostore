@@ -226,35 +226,19 @@ OrderCheckout.create(order_id: params[:order_id],
    @OrderCheckout.update_attributes(purchased_at: DateTime.now  )
    
    
-   logger.debug puts " debbuger
-                      \n @Order->\n #{@Order.id }
-                      \n
-                      \n @Order.order_items->\n #{@Order.order_items.all.inspect }        
-                    "
    
    @Order.order_items.each do |item|
        
-         Item.find(item.item_id) do |itemIn|
+                 @item =  Item.find(item.item_id)
              
-              logger.debug puts " debbuger
-                                \n itemIn.inspect->\n #{itemIn.inspect }"
-             
-           OrderCheckout.find(@OrderCheckout.id).checkout_paid_items.create(title: itemIn.title, name: itemIn.name, price:itemIn.price, body: itemIn.body)
-           
-          end
+                 OrderCheckout.find(@OrderCheckout.id).checkout_paid_items.create(title: @item.title , price: @item.price , name: @item.name, body: @item.body)
+            
+            
       end   
     
     
-     logger.debug puts "
-                      debbuger
-                      \n @Order.order_items.inspect->\n #{@Order.order_items.inspect }
-                      \n Rails.env.production?-> #{Rails.env.production? }
-                      " 
-    
       
-     
-      
-   # @Order.order_items.all.delete_all
+    @Order.order_items.all.delete_all
     
     if Rails.env.production?
         
