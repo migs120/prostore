@@ -12,31 +12,33 @@ table, th, tr, td { border:solid 1px;}
 
              <h2>purchases.html.erb</h2>
                     
-             <% OrderCheckout.all.each.with_index do |this, index = 1|%>
+             <% OrderCheckout.all.each.with_index do |loopOrderCheckout, index = 1|%>
                    
-             <% if this.purchased_at && !this.paid_shipped_n_done %>
+             <% if loopOrderCheckout.purchased_at && !loopOrderCheckout.paid_shipped_n_done %>
             
-             <div id="order_checkout-<%=this.id%>">
+             <div id="order_checkout-<%=loopOrderCheckout.id%>">
                
                           <table style="width:100%;">
-                            <tr>
-                              <th colspan="3">Order Checkout <%=index%></th>
-                            </tr>
-                            <tr>
-                              <th>key</th>
-                             <th>value</th>
-                            </tr>
-                            <% this.attributes.each do |j|%>
-                            <tr>
-                              <td><%=j[0]%></td>
-                              <td><%=j[1]%></td>
-                            </tr>
-                            <%end%>
+                                <tr>
+                                  <th colspan="3">Order Checkout <%=index%></th>
+                                </tr>
+                                <tr>
+                                  <th>key</th>
+                                 <th>value</th>
+                                </tr>
+                                
+                                <% loopOrderCheckout.attributes.each do |j|%>
+                                <tr>
+                                  <td><%=j[0]%></td>
+                                  <td><%=j[1]%></td>
+                                </tr>
+                                <%end%>
+                            
                           </table>
             
                      
                                            
-                        <% this.order_checkout_transactions.each do |oct|%>
+                        <% loopOrderCheckout.order_checkout_transactions.each do |oct|%>
                           <table style="width:100%;">
                             <tr>
                               <th colspan="3">Order Checkout Transaction</th>
@@ -56,7 +58,7 @@ table, th, tr, td { border:solid 1px;}
             
             
                          <h4>items bought</h4>
-                         <%this.checkout_paid_items.each do |item|%>
+                         <%loopOrderCheckout.checkout_paid_items.each do |item|%>
                                                  
             
                            <table style="width:100%;">
@@ -79,7 +81,7 @@ table, th, tr, td { border:solid 1px;}
                                          <%end%>
                                   
                                     <br>
-                                    <button><%= link_to "Done", [this], method: :put, remote: true %></button>
+                                    <button><%= link_to "Done", [loopOrderCheckout], method: :put, remote: true %></button>
 
                                     <p>===============================================================================</p>
                                  </div>
