@@ -197,21 +197,21 @@ class OrderCheckoutsController < ApplicationController
  #   li2 = "-#{params[:order_checkout]['card_expires_on(2i)']}"
  #   li3 = "-#{params[:order_checkout]['card_expires_on(3i)']}"
  #   card_exp_date = li1+li2+li3
-  @order = OrderCheckout.create(order_id: params[:order_id],
-                                first_name: params[:first_name] ,
-                                last_name:  params[:last_name] ,
-                                email: params[:payer_email] ,
-                                adress:  params[:address_street] ,
-                                city: params[:address_city] ,
-                                state:params[:address_state] ,
-                                zip: params[:address_zip] ,
-                                bill_name:params[:address_name] ,
-                                bill_adress:  params[:address_street] ,
-                                bill_city: params[:address_city] ,
-                                bill_state:  params[:address_state] ,
-                                bill_zip: params[:address_zip] ,  
-                                instructions: params.to_s
-                                ).save
+OrderCheckout.create(order_id: params[:order_id],
+                    first_name: params[:first_name] ,
+                    last_name:  params[:last_name] ,
+                    email: params[:payer_email] ,
+                    adress:  params[:address_street] ,
+                    city: params[:address_city] ,
+                    state:params[:address_state] ,
+                    zip: params[:address_zip] ,
+                    bill_name:params[:address_name] ,
+                    bill_adress:  params[:address_street] ,
+                    bill_city: params[:address_city] ,
+                    bill_state:  params[:address_state] ,
+                    bill_zip: params[:address_zip] ,  
+                    instructions: params.to_s
+                    )
     
    @Order = Order.find(params[:order_id])
    
@@ -225,24 +225,18 @@ class OrderCheckoutsController < ApplicationController
    
    @OrderCheckout.update_attributes(purchased_at: DateTime.now  )
    
+   
+   
    @Order.order_items.each do |item|
        
-         Item.find(item.item_id) do |itemIn|
+                 @item =  Item.find(item.item_id)
              
-           OrderCheckout.find(@OrderCheckout.id).checkout_paid_items.create(title: itemIn.title, name: itemIn.name, price:itemIn.price, body: itemIn.body)
-           
-          end
+                 OrderCheckout.find(@OrderCheckout.id).checkout_paid_items.create(title: @item.title , price: @item.price , name: @item.name, body: @item.body)
+            
+            
       end   
     
     
-     logger.debug puts "
-                      debbuger
-                      \n @Order.order_items.inspect->\n #{@Order.order_items.inspect }
-                      \n Rails.env.production?-> #{Rails.env.production? }
-                      " 
-    
-      
-     
       
     @Order.order_items.all.delete_all
     
@@ -253,6 +247,7 @@ class OrderCheckoutsController < ApplicationController
         Mailer.email("migs@hotmail.com") 
         
     end
+
 #=end
     
     
