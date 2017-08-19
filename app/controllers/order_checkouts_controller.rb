@@ -48,9 +48,12 @@ class OrderCheckoutsController < ApplicationController
     if @order.purchase(current_order, params)
       @order.update_attributes(purchased_at: DateTime.now  )     
        current_order.order_items.each do |item|
-         Item.find(item.item_id) do |itemIn|
-           OrderCheckout.find(@order.id).checkout_paid_items.create(title: itemIn.title, name: itemIn.name, price:itemIn.price, body: itemIn.body)
-          end
+       
+                 @item =  Item.find(item.item_id)
+             
+                 OrderCheckout.find(@order.id).checkout_paid_items.create(title: @item.title , price: @item.price , name: @item.name, body: @item.body)
+            
+            
       end   
     
       current_order.order_items.all.delete_all
