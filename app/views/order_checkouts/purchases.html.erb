@@ -18,6 +18,13 @@ table, th, tr, td { border:solid 1px;}
             
              <div id="order_checkout-<%=loopOrderCheckout.id%>">
                
+               
+               <h4>Order Checkout <%=index%></h4>
+                <button id="hide">Hide</button>
+                <button id="show">Show</button>
+                
+                   <div>
+                    
                           <table style="width:100%;">
                                 <tr>
                                   <th colspan="3">Order Checkout <%=index%></th>
@@ -35,7 +42,7 @@ table, th, tr, td { border:solid 1px;}
                                 <%end%>
                             
                           </table>
-            
+                  </div>
                    
                         <% loopOrderCheckout.order_checkout_transactions.each do |oct|%>
                           <table style="width:100%;">
@@ -54,7 +61,8 @@ table, th, tr, td { border:solid 1px;}
                             <%end%>
                           </table>
                             <%end%>
-            
+                            
+     
             
                          <h4>items bought</h4>
                          <%loopOrderCheckout.checkout_paid_items.each do |item|%>
@@ -97,3 +105,25 @@ table, th, tr, td { border:solid 1px;}
             <div class="col-1 seebox"></div> 
 
 <%end%>
+
+
+<script>
+$(document).ready(function(){
+    $("*#hide").click(function(){
+        $(this).next().next().hide();
+    });
+    $("*#show").click(function(){
+        $(this).next().show();
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
