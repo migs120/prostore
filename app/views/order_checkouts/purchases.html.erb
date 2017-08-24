@@ -20,10 +20,11 @@ table, th, tr, td { border:solid 1px;}
                
                
                <h4>Order Checkout <%=index%></h4>
-                <button id="hide">Hide</button>
-                <button id="show">Show</button>
+             
+                <button id="hide" style="border:solid;">Hide</button>
+                <button id="show" style="border:solid;">Show</button>
                 
-                   <div>
+                   <div  class='init_hide'>
                     
                           <table style="width:100%;">
                                 <tr>
@@ -45,7 +46,13 @@ table, th, tr, td { border:solid 1px;}
                   </div>
                    
                         <% loopOrderCheckout.order_checkout_transactions.each do |oct|%>
-                          <table style="width:100%;">
+                        
+                <h4>Order Transaction <%=oct.id%></h4>
+                <button id="hide" style="border:solid;">Hide</button>
+                <button id="show" style="border:solid;">Show</button>
+                
+                
+                          <table class='init_hide' style="width:100%;">
                             <tr>
                               <th colspan="3">Order Checkout Transaction</th>
                             </tr>
@@ -109,6 +116,9 @@ table, th, tr, td { border:solid 1px;}
 
 <script>
 $(document).ready(function(){
+  
+  $("*.init_hide").hide()
+  
     $("*#hide").click(function(){
         $(this).next().next().hide();
     });
