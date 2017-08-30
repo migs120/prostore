@@ -112,7 +112,7 @@
    </script>
    
    
-   
+   <%if Rails.env.production? %>
     <script>
         var userip;
     </script>
@@ -131,6 +131,8 @@
             _bm_request.onreadystatechange = function() { };
             _bm_request.send(JSON.stringify(_bm_event));
     </script>
+    
+    <%end%>
 
 </html>
 
