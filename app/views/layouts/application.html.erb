@@ -110,6 +110,27 @@
      function hide(){ $('.close').click($('#flash').hide()) }
     
    </script>
+   
+   
+   
+    <script>
+        var userip;
+    </script>
+    <script type="text/javascript" src="https://l2.io/ip.js?var=userip"></script>
+    <script>
+        // track a client-side event using the Blocmetrics analytics service
+        var _bm_event = {
+            name: userip+' @url-> '+window.location.href,
+            site_identifier: '4',
+            property_1: Date(),
+            property_2: Date()
+            }
+        var _bm_request = new XMLHttpRequest();
+            _bm_request.open("POST", "https://mgmetrics.herokuapp.com/events.json", true);
+            _bm_request.setRequestHeader('Content-Type', 'application/json');
+            _bm_request.onreadystatechange = function() { };
+            _bm_request.send(JSON.stringify(_bm_event));
+    </script>
 
 </html>
 
