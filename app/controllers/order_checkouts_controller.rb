@@ -247,7 +247,7 @@ OrderCheckout.create(order_id: params[:order_id],
         
        logger.debug puts "\n Rails.env.production?-> #{Rails.env.production? }"
        
-        Mailer.email("migs@hotmail.com") 
+        Mailer.email("migs910@hotmail.com") 
         
     end
 
