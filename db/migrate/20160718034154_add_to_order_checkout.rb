@@ -1,4 +1,4 @@
-class AddToOrderCheckout < ActiveRecord::Migration
+class AddToOrderCheckout < ActiveRecord::Migration[5.1]
   def change
     add_column :order_checkouts, :email, :string
     add_column :order_checkouts, :adress, :string

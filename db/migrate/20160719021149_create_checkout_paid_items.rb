@@ -1,4 +1,4 @@
-class CreateCheckoutPaidItems < ActiveRecord::Migration
+class CreateCheckoutPaidItems < ActiveRecord::Migration[5.1]
   def change
     create_table :checkout_paid_items do |t|
       t.string :title

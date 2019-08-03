@@ -1,4 +1,4 @@
-class CreateMainCategoryPics < ActiveRecord::Migration
+class CreateMainCategoryPics < ActiveRecord::Migration[5.1]
   def change
     create_table :main_category_pics do |t|
       t.string :pic_url

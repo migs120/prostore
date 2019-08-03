@@ -1,4 +1,4 @@
-class CreateItemPics < ActiveRecord::Migration
+class CreateItemPics < ActiveRecord::Migration[5.1]
   def change
     create_table :item_pics do |t|
       t.string :pic_url

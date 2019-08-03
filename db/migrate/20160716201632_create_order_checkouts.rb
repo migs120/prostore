@@ -1,4 +1,4 @@
-class CreateOrderCheckouts < ActiveRecord::Migration
+class CreateOrderCheckouts < ActiveRecord::Migration[5.1]
   def change
     create_table :order_checkouts do |t|
       t.references :order, index: true
