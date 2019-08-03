@@ -23,6 +23,7 @@ class OrderCheckoutsController < ApplicationController
     li2 = "-#{params[:order_checkout]['card_expires_on(2i)']}"
     li3 = "-#{params[:order_checkout]['card_expires_on(3i)']}"
     card_exp_date = li1+li2+li3
+    emailforemail = params[:order_checkout][:email] == '' ? current_order.order_checkouts.last.email : params[:order_checkout][:email]
   @order = OrderCheckout.create(order_id: current_order.id,
                                 first_name: params[:order_checkout][:first_name] == '' ? current_order.order_checkouts.last.first_name : params[:order_checkout][:first_name] ,
                                 last_name: params[:order_checkout][:last_name] == '' ? current_order.order_checkouts.last.last_name : params[:order_checkout][:last_name] ,
@@ -63,9 +64,17 @@ class OrderCheckoutsController < ApplicationController
           if Rails.env.production?
             
                 logger.debug puts "\n Rails.env.production?-> #{Rails.env.production? }"
-                Mailer.email("migs@hotmail.com") 
+                Mailer.email("migs@miggymigs.com") 
             
           end
+          
+          if Rails.env.development?
+
+          logger.debug puts "\n Rails.env.production?-> #{Rails.env.production? }"
+          logger.debug puts    "\n email-> #{emailforemail}"
+            logger.debug puts    Mailer.email(emailforemail) 
+
+          end  
       
     else
      

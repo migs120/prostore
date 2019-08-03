@@ -23,7 +23,7 @@ end
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -45,7 +45,7 @@ end
   # config.action_view.raise_on_missing_translations = true
   #config.action_mailer.raise_delivery_errors = true # bloc diagnosis scrips
    # config.action_mailer.default_url_options = { host: 'ruby-on-rails-122217.nitrousapp.com:3000' }
-    config.action_mailer.default_url_options = { host: 'miggytech-migs432.c9users.io' }
+    config.action_mailer.default_url_options = { host: 'miggymigs.com' }
    config.action_mailer.delivery_method = :smtp
    config.action_mailer.perform_deliveries = true
 end
