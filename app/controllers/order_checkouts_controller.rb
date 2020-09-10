@@ -144,7 +144,7 @@ class OrderCheckoutsController < ApplicationController
                                     "&method=post",
                                     
                                   
-                      handling_cart: "1.00",
+                      handling_cart: "0.00",
                       
                       shopping_url: "#{request.base_url}/"
                       
