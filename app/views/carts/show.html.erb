@@ -10,8 +10,13 @@
 <%= render "total"%>
 </div>
 <button><%= link_to 'Continue Shopping', root_path%></button><br><br>
-<button><%= link_to 'Procced to checkout', new_order_checkout_path%></button>
+
+<%= link_to paypal_path, method: :post do %> 
+  <button >Procced to checkout</button><br>
+<%end%>
+
 <br><br><br><br><br>
 </div>
 <!-- right side div -->
 <div class="col-1"></div>
+
