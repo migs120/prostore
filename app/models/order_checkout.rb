@@ -23,7 +23,8 @@ class OrderCheckout < ActiveRecord::Base
   end
   
   def price_in_cents(current_order)
-    (current_order.subtotal*100 + 400).round 
+    # (current_order.subtotal*100 + 400).round 
+    (current_order.subtotal*100).round
   end
 
   private
